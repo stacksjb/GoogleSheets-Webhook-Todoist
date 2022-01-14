@@ -1,0 +1,41 @@
+{
+  version = 0, 
+    event_data = {
+      child_order = 000.0,
+      responsible_uid = null,
+      content = test task,
+      legacy_project_id = 0.0000000E0,
+      sync_id = null,
+      date_added = 0000 - 00 - 00 T00: 00: 00 Z,
+      id = 0.000000000E0,
+      due = {
+        lang = en,
+        date = 0000 - 00 - 00,
+        string = ev day,
+        is_recurring = true,
+        timezone = null
+      },
+      in_history = 0.0,
+      user_id = 000000.0,
+      is_deleted = 0.0,
+      section_id = null,
+      url = https: //todoist.com/showTask?id=0000000000,
+      project_id=0.000000000E0, 
+      description=Priority 0 test task,
+      labels=[Ljava.lang.Object;@0fb0c00e, collapsed=0.0, priority=0.0,
+      parent_id=null,
+      date_completed=null,
+      assigned_by_uid=null,
+      added_by_uid=0000000.0,
+      checked=0.0
+      },
+    user_id=0000000.0,
+    event_name=item:completed,
+    initiator={
+      full_name=Todoist User,
+      email=todoistuseremail@domain.com,
+      image_id=0bd00a0c0feefe0e0fc0fabe000e0000,
+      id=0000000.0,
+      is_premium=true
+      }
+  }
