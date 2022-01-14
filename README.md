@@ -22,5 +22,5 @@ A: Be slow and methodical in testing - if you complete too many too quickly (or 
 Q: How can I see the full values being received?  
 A: Simply setValue of the cell to the full PostData Contents (var data in this script)
 
-Q: I added a value but it isn't showing up in my sheet. 
-A: Did you remember to change the cell ID (incrememnt by 1)? 
+Q: I added a value but it isn't showing up in my sheet.  
+A: Did you remember to change the cell ID (increase by 1)? 
