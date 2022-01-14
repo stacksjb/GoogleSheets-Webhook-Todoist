@@ -17,3 +17,6 @@ A: Configure a service at https://developer.todoist.com/appconsole.html . Add th
 
 Q: I'm completing tasks but they aren't showing up instantly in the Google Sheet
 A: Be slow and methodical in testing - if you complete too many too quickly (or if the sheets API gets hit with more than one at once) it will choke.
+
+Q: How can I see the full values being received?
+A: Simply setValue of the cell to the full PostData Contents (var data in this script)
