@@ -26,6 +26,7 @@ function doPost(e) {
   var initiator_name = initiator.full_name
   var initiator_email = initiator.email
   var initiator_id = initiator.id
+  var labels = JSON.stringify(event_data.labels)
  
   var sheet = SpreadsheetApp.getActiveSheet();
   var lastRow = Math.max(sheet.getLastRow(),1);
@@ -47,6 +48,7 @@ function doPost(e) {
   sheet.getRange(lastRow + 1, 14).setValue(initiator_email);
   sheet.getRange(lastRow + 1, 15).setValue(initiator_id);
   sheet.getRange(lastRow + 1, 16).setValue(url);
+  sheet.getRange(lastRow + 1, 17).setValue(labels);
 
   SpreadsheetApp.flush();
   return HtmlService.createHtmlOutput("post request received");
