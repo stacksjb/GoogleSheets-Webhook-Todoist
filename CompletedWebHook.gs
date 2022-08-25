@@ -29,7 +29,7 @@ function doPost(e) {
   sheet.insertRowAfter(lastRow)
   var timestamp = new Date()
   
-  //attempt to parse due nad recurrding; skip if not preset or recurring not set
+  //attempt to parse due and recurring; wrap in try block to skip if not preset/not set
   try {
     var due = event_data.due
     is_recurring = due.is_recurring
