@@ -1,3 +1,5 @@
+
+
 //this is a function that fires when the webapp receives a GET request
 function doGet(e) {
   return HtmlService.createHtmlOutput("request received");
@@ -6,8 +8,6 @@ function doGet(e) {
 //this is a function that fires when the webapp receives a POST request
 function doPost(e) {
 //  var params = JSON.stringify(e.postData.parameters);
-  var m = "1"
-  var date_added_parsed = "2"
   var is_recurring = "FALSE"
   var data = JSON.parse(e.postData.contents)
   var event_data = data.event_data
@@ -33,8 +33,7 @@ function doPost(e) {
   var timestamp = new Date()
   
   try {
-    date_added_parsed = date_added.slice(0, -1); //A method to remove the trailing Z
-    m = Moment.moment(date_added).format('MM/d/YY, h:mm:ss a') //A method if you want to use MomentJS
+    var date_added_parsed = date_added.slice(0, -1); //A method to remove the trailing Z
     var due = event_data.due
     if (due) {
     is_recurring = due.is_recurring
@@ -68,10 +67,8 @@ function doPost(e) {
     sheet.getRange(lastRow + 1, 18).setValue(initiator_id)
     sheet.getRange(lastRow + 1, 19).setValue(labels)
    // sheet.getRange(lastRow + 1, 20).setValue(data) //Test line to dump full JSON blob for troubleshooting or tuning
-    sheet.getRange(lastRow + 1, 21).setValue(date_added)
-    sheet.getRange(lastRow + 1, 22).setValue(date_added_parsed)
-    sheet.getRange(lastRow + 1, 23).setValue(m)
     Logger.log("Webhook Received")
     SpreadsheetApp.flush()
     return HtmlService.createHtmlOutput("post request received")
     }
+}
