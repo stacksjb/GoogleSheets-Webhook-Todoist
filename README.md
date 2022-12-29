@@ -26,3 +26,6 @@ Q: I made some changes and a value but it isn't showing up in my sheet.
 A: Did you remember to change the cell ID (increase by 1)?  
 A: Did you remember to re-deploy your Google Script?  
 A: Did you deploy it to the same URL or a new one?  
+
+Q: How do I handle timestamps?
+A: Unfortunately, timestamps come through in ISO8601/RFC3339 format with date/time/millisecond/Z, and are no longer recognized by Google Sheets or Data Studio as Date/Time fields (which can make comparisons tough). There are a few methods you can use to parse them. The easiest is to set your timesheet to UTC time (Under File -> Settings) and then simply remove the Z with ' date_added_parsed = date_added.slice(0, -1); ' . Another option is to use the Moment.JS Library to format an output. Both examples are in the code, you only need one.
