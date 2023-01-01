@@ -8,7 +8,7 @@ function doGet(e) {
 //this is a function that fires when the webapp receives a POST request
 function doPost(e) {
 //  var params = JSON.stringify(e.postData.parameters);
-  var is_recurring = "FALSE"
+  var is_recurring = "FALSE" //Set recurring to false by default for True/False instead of Null/True
   var data = JSON.parse(e.postData.contents)
   var event_data = data.event_data
   var completed_at = event_data.completed_at
@@ -33,26 +33,29 @@ function doPost(e) {
   var timestamp = new Date()
   
   try {
-    var date_added_parsed = date_added.slice(0, -1); //A method to remove the trailing Z
+    var date_added_parsed = new Date(date_added)
     var due = event_data.due
+    //Parse dates if due date are set
     if (due) {
-    is_recurring = due.is_recurring
-    var due_string = due.string
-    var due_date = due.date
-    var due_datetime = due.datetime
-    sheet.getRange(lastRow + 1, 13).setValue(due_date)
-    sheet.getRange(lastRow + 1, 14).setValue(due_datetime)
-    sheet.getRange(lastRow + 1, 15).setValue(due_string)
+      is_recurring = due.is_recurring
+      var due_string = due.string
+      var due_date = due.date
+      var due_datetime = due.datetime
+      sheet.getRange(lastRow + 1, 13).setValue(due_date)
+      sheet.getRange(lastRow + 1, 14).setValue(due_datetime)
+      sheet.getRange(lastRow + 1, 15).setValue(due_string)
      }
-    if (is_recurring != "FALSE")
-      completed_at = timestamp //Hack for recurring tasks that come through without completed_at timestamp to replace with webhook timestamp
+    //Catch statement for recurring tasks which don't come through with completed_at
+    if (completed_at == null) {
+      completed_at = timestamp
+      }
     }
-
     
   finally{
+    var completed_at_parsed = new Date(completed_at)
     sheet.getRange(lastRow + 1, 1).setValue(timestamp)
     sheet.getRange(lastRow + 1, 2).setValue(event_name)
-    sheet.getRange(lastRow + 1, 3).setValue(completed_at)
+    sheet.getRange(lastRow + 1, 3).setValue(completed_at_parsed)
     sheet.getRange(lastRow + 1, 4).setValue(task_id)
     sheet.getRange(lastRow + 1, 5).setValue(url)
     sheet.getRange(lastRow + 1, 6).setValue(project_id)
@@ -67,6 +70,7 @@ function doPost(e) {
     sheet.getRange(lastRow + 1, 18).setValue(initiator_id)
     sheet.getRange(lastRow + 1, 19).setValue(labels)
    // sheet.getRange(lastRow + 1, 20).setValue(data) //Test line to dump full JSON blob for troubleshooting or tuning
+
     Logger.log("Webhook Received")
     SpreadsheetApp.flush()
     return HtmlService.createHtmlOutput("post request received")
